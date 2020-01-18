@@ -1,0 +1,12 @@
+.idea
+.ipynb_checkpoints
+.git
+.DS_Store
+*.ipynb
+log/*
+build
+.gitignore
+.gitmodules
+.dockerignore
+Dockerfile
+README.md

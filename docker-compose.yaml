@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sports_data_crawler:
+    build:
+      context: ./
+      dockerfile: ./build/Dockerfile
+    image: allensyk/sports_data_crawler:0.2
+    container_name: crawler
+    environment:
+      DB_HOST: allenfield.ddns.net
+      DB_PORT: 7306
+      DB_USERNAME: allen
+      DB_PASSWORD: aldbpw
