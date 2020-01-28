@@ -14,13 +14,13 @@ class NoSqlConverter:
 
         self.config = Util().get_config()
         self.db = Util().get_db_connection()
-        self.mongo_client = MongoClient(host=self.config['mongoDb']['host'], port=self.config['mongoDb']['port'])
+        self.mongo_client = MongoClient(host=self.config['mongoDb']['host'],
+                                        port=self.config['mongoDb']['port'])['gambling_simulation']['sports_data']
 
     def start(self):
         self.logger.info('start converter')
-        mongo_db = self.mongo_client['gambling_simulation']['test']
 
-        for index, row in self.get_joined_table().iterrows():
+        for index, row in self.get_joined_table(start_id=self.last_converted_id()).iterrows():
             self.logger.debug('wipe game id: {}'.format(index))
             json_document = {}
             self.add_common_info(row, json_document, index)
@@ -32,8 +32,7 @@ class NoSqlConverter:
                 self.add_prediction_judgement_info(row, json_document, group)
             self.remove_nan_key(json_document)
             self.logger.debug('wiped document: {}'.format(json_document))
-            mongo_db.insert_one(json_document)
-            # self.es.index(index=row['game_type'].lower(), body=json_document)
+            self.mongo_client.insert_one(json_document)
 
     def get_prediction_groups(self):
         self.logger.debug('getting prediction group')
@@ -194,10 +193,14 @@ class NoSqlConverter:
             self.logger.debug('get table: {}'.format(table_name))
             yield table_name, pd.read_sql('SELECT * FROM %s LIMIT 10' % (table_name), con=self.db, index_col='id')
 
-    def get_joined_table(self):
+    def get_joined_table(self, start_id=0):
         self.logger.info('start get joined table')
         sql_select = 'SELECT %s FROM game_data ' % ', '.join(constant.joined_columns)
-        sql_join = ' '.join(['LEFT JOIN %s ON %s.id=game_data.id' % (table_name, table_name)
+        sql_join = ' '.join(['LEFT JOIN %s ON %s.id=game_data.id ' % (table_name, table_name)
                              for table_name in constant.joined_tables if table_name != 'game_data'])
-        sql = sql_select + sql_join
+        sql_where = 'WHERE game_data.id > %s' % start_id
+        sql = sql_select + sql_join + sql_where
         return pd.read_sql(sql, con=self.db, index_col='id')
+
+    def last_converted_id(self):
+        return self.mongo_client.find().sort('_id', -1).limit(1).next()['_id']
