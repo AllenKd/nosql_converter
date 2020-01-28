@@ -31,6 +31,12 @@ class Util(metaclass=Singleton):
             config[global_constant.DB][global_constant.password] = os.environ.get('DB_PASSWORD') if \
                 os.environ.get('DB_PASSWORD') else config[global_constant.DB][global_constant.password]
 
+            config[global_constant.DB][global_constant.host] = os.environ.get('MONGO_HOST') if \
+                os.environ.get('MONGO_HOST') else config[global_constant.DB][global_constant.host]
+
+            config[global_constant.DB][global_constant.port] = int(os.environ.get('MONGO_PORT')) if \
+                os.environ.get('MONGO_PORT') else config[global_constant.DB][global_constant.port]
+
         # overwrite config by environment variable
         with open('config/configuration.yml', 'w') as new_config:
             yaml.dump(config, new_config)
