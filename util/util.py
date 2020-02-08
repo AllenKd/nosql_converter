@@ -41,6 +41,7 @@ class Util(metaclass=Singleton):
         with open('config/configuration.yml', 'w') as new_config:
             yaml.dump(config, new_config)
 
+        self.config = config
         self.logger.debug('finish update config file')
         return
 
