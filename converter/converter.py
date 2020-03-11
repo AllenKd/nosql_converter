@@ -15,7 +15,11 @@ class NoSqlConverter:
         self.config = Util().get_config()
         self.db = Util().get_db_connection()
         self.mongo_client = MongoClient(host=self.config['mongoDb']['host'],
-                                        port=self.config['mongoDb']['port'])['gambling_simulation']['sports_data']
+                                        port=self.config['mongoDb']['port'],
+                                        username=self.config['mongoDb']['username'],
+                                        password=self.config['mongoDb']['password'],
+                                        authSource=self.config['DB']['schema'],
+                                        authMechanism='SCRAM-SHA-1')['gambling_simulation']['sports_data']
 
     def start(self):
         self.logger.info('start converter')
