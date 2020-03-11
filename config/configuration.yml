@@ -2,15 +2,17 @@ logging:
   level: DEBUG
 DB:
   host: 192.168.31.73
+  password: aldbpw
   port: 3306
   schema: gambling_simulation
   user: allen
-  password: aldbpw
-mongoDb:
-  host: 127.0.0.1
-  port: 27017
 crawler:
   dateFormat: '%Y%m%d'
   urlPattern: https://www.playsport.cc/predictgame.php?action=scale&allianceid={game_type}&gametime={game_date}&sid={group_type}
 data_updater:
   update_period: 24
+mongoDb:
+  host: 192.168.31.73
+  password: aldbpw
+  port: 27017
+  username: allen
