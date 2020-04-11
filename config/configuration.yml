@@ -1,5 +1,3 @@
-logging:
-  level: DEBUG
 DB:
   host: 192.168.31.73
   password: aldbpw
@@ -11,8 +9,10 @@ crawler:
   urlPattern: https://www.playsport.cc/predictgame.php?action=scale&allianceid={game_type}&gametime={game_date}&sid={group_type}
 data_updater:
   update_period: 24
+logging:
+  level: DEBUG
 mongoDb:
   host: 192.168.31.73
-  password: aldbpw
+  password: password
   port: 27017
   username: allen
