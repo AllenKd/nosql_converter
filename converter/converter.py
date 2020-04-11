@@ -50,7 +50,6 @@ class NoSqlConverter:
     def add_common_info(self, row, json_document, index):
         self.logger.debug("add common info")
 
-        json_document["_id"] = index
         json_document["game_id"] = index
         json_document["game_time"] = datetime.datetime.strptime(
             "{} {}".format(row["game_date"], row["play_time"]),
@@ -100,13 +99,13 @@ class NoSqlConverter:
         json_document["judgement"] = json_document.get("judgement", {})
         json_document["judgement"]["game"] = json_document["judgement"].get("game", {})
         json_document["judgement"]["game"]["national"] = {
-            "over_threshold": bool(row["over_total_point_national"]),
+            "total_point": bool(row["over_total_point_national"]),
             "spread_point": "host"
             if row["host_win_point_spread_national"]
             else "guest",
         }
         json_document["judgement"]["game"]["local"] = {
-            "over_threshold": bool(row["over_total_point_local"]),
+            "total_point": bool(row["over_total_point_local"]),
             "spread_point": "host" if row["host_win_point_spread_local"] else "guest",
             "original": "host" if row["host_win_original"] else "guest",
         }
