@@ -5,6 +5,7 @@ import schedule
 
 from converter.converter import NoSqlConverter
 from util.util import Util
+from mongodb.init_db import init_mongo
 
 
 @click.group(chain=True)
@@ -20,6 +21,7 @@ def cli():
               help='Analysis period in hour')
 def task_convert_data(period):
     click.echo('do nosql converter')
+    init_mongo()
     Util().load_environment_variable()
     schedule.every(period).hours.do(NoSqlConverter().start)
     while True:
