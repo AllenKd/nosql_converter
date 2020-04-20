@@ -2,6 +2,7 @@ import os
 
 import pymysql
 import yaml
+from pymongo import MongoClient
 
 from config.constant import global_constant
 from config.logger import get_logger
@@ -62,6 +63,16 @@ class Util(metaclass=Singleton):
     def get_config(self):
         self.logger.info("getting config")
         return self.config
+
+    @classmethod
+    def get_mongo_client(cls):
+        return MongoClient(
+            host=Util().config["mongoDb"]["host"],
+            port=Util().config["mongoDb"]["port"],
+            username=Util().config["mongoDb"]["username"],
+            password=Util().config["mongoDb"]["password"],
+            authMechanism="SCRAM-SHA-1",
+        )
 
     def get_db_connection(self):
         self.logger.debug("getting db connection")

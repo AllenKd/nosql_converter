@@ -5,6 +5,7 @@ from pymongo import MongoClient
 
 from config.logger import get_logger
 from converter import constant
+import math
 from util.util import Util
 
 
@@ -39,7 +40,7 @@ class NoSqlConverter:
                 self.add_prediction_judgement_info(row, json_document, group)
             self.remove_nan_key(json_document)
             self.logger.debug("wiped document: {}".format(json_document))
-            self.mongo_client.insert_one(json_document)
+            self.mongo_client.update(json_document, json_document, upsert=True)
 
     def get_prediction_groups(self):
         self.logger.debug("getting prediction group")
@@ -48,14 +49,16 @@ class NoSqlConverter:
         return [group[0][16:] for group in cursor.fetchall()]
 
     def add_common_info(self, row, json_document, index):
-        self.logger.debug("add common info")
+        self.logger.debug(f"add common info: {row}")
 
         json_document["game_id"] = index
         json_document["game_time"] = datetime.datetime.strptime(
             "{} {}".format(row["game_date"], row["play_time"]),
             "{} {}".format(self.config["crawler"]["dateFormat"], "%I:%M"),
         ).isoformat("T", "minutes")
-        json_document["gamble_id"] = row["gamble_id"]
+        json_document["gamble_id"] = (
+            index if math.isnan(row["gamble_id"]) else row["gamble_id"]
+        )
         json_document["game_type"] = row["game_type"]
         return json_document
 
@@ -391,8 +394,10 @@ class NoSqlConverter:
         return pd.read_sql(sql, con=self.db, index_col="id")
 
     def last_converted_id(self):
-        last_id = self.mongo_client.find_one({}, sort=[("_id", -1)])
+        last_id = self.mongo_client.find_one(
+            {}, {"game_id": True, "_id": False}, sort=[("game_id", -1)]
+        )
         if last_id:
-            return last_id["_id"]
+            return last_id["game_id"]
         else:
             return 1
