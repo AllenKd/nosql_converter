@@ -20,425 +20,468 @@ $ docker pull allensyk/nosql_converter
 ## Converted JSON Document Example
 
 ```
-{ 
-    "_id" : NumberInt(6896), 
-    "game_id" : NumberInt(6896), 
-    "game_time" : "2020-01-27T10:00", 
-    "gamble_id" : NumberInt(454), 
-    "game_type" : "NBA", 
+{
+    "_id" : ObjectId("5e9dc4498db98f99c86d1393"),
+    "game_id" : 911,
+    "game_time" : "2018-09-29T07:30",
+    "gamble_id" : 360.0,
+    "game_type" : "NBA",
     "guest" : {
-        "name" : "IND", 
-        "score" : NumberInt(129)
-    }, 
+        "name" : "BOS",
+        "score" : 97
+    },
     "host" : {
-        "name" : "POR", 
-        "score" : NumberInt(139)
-    }, 
+        "name" : "CHA",
+        "score" : 104
+    },
     "gamble_info" : {
         "national" : {
             "total_point" : {
-                "threshold" : 221.0
-            }, 
+                "threshold" : 207.0
+            },
             "spread_point" : {
-                "host" : NumberInt(3), 
+                "host" : -5.0,
                 "response" : {
-                    "on_hit" : 1.5
+                    "on_hit" : 0.5
                 }
             }
-        }, 
+        },
         "local" : {
             "total_point" : {
-                "threshold" : 221.5, 
-                "response" : 1.7
-            }, 
-            "spread_point" : {
-                "host" : 1.5, 
+                "threshold" : 207.5,
                 "response" : {
-                    "host" : 1.8
+                    "under" : 1.75,
+                    "over" : 1.75
                 }
-            }, 
+            },
+            "spread_point" : {
+                "host" : -6.5,
+                "response" : {
+                    "host" : 1.75,
+                    "guest" : 1.75
+                }
+            },
             "original" : {
                 "response" : {
-                    "guest" : 1.85, 
-                    "host" : 1.65
+                    "guest" : 0.0,
+                    "host" : 0.0
                 }
             }
         }
-    }, 
+    },
     "judgement" : {
         "game" : {
             "national" : {
-                "over_threshold" : false, 
-                "spread_point" : "guest"
-            }, 
+                "total_point" : false,
+                "spread_point" : "host"
+            },
             "local" : {
-                "over_threshold" : false, 
-                "spread_point" : "guest", 
-                "original" : "guest"
+                "total_point" : false,
+                "spread_point" : "host",
+                "original" : "host"
             }
-        }, 
-        "prediction" : [
+        },
+        "prediction" : [ 
             {
-                "group" : "all_member", 
+                "group" : "all_member",
                 "national" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 55.0,
+                            "population" : 370.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 39.0,
+                            "population" : 375.0
                         }
                     }
-                }, 
+                },
                 "local" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 66.0,
+                            "population" : 327.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 43.0,
+                            "population" : 290.0
                         }
-                    }, 
+                    },
                     "original" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
                     }
                 }
             }, 
             {
-                "group" : "all_prefer", 
+                "group" : "all_prefer",
                 "national" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 52.0,
+                            "population" : 171.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 40.0,
+                            "population" : 256.0
                         }
                     }
-                }, 
+                },
                 "local" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 72.0,
+                            "population" : 190.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 42.0,
+                            "population" : 184.0
                         }
-                    }, 
+                    },
                     "original" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
                     }
                 }
             }, 
             {
-                "group" : "more_than_sixty", 
+                "group" : "more_than_sixty",
                 "national" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 40.0,
+                            "population" : 2.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 40.0,
+                            "population" : 2.0
                         }
                     }
-                }, 
+                },
                 "local" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
-                    }, 
+                    },
                     "original" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
                     }
                 }
             }, 
             {
-                "group" : "top_100", 
+                "group" : "top_100",
                 "national" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 25.0,
+                            "population" : 1.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 50.0,
+                            "population" : 1.0
                         }
                     }
-                }, 
+                },
                 "local" : {
                     "total_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : true,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
-                    }, 
+                    },
                     "spread_point" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
-                    }, 
+                    },
                     "original" : {
                         "matched_info" : {
-                            "is_major" : false
+                            "is_major" : false,
+                            "percentage" : 0.0,
+                            "population" : 0.0
                         }
                     }
                 }
             }
         ]
-    }, 
-    "prediction" : [
+    },
+    "prediction" : [ 
         {
-            "group" : "all_member", 
+            "group" : "all_member",
             "national" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(63), 
-                        "population" : NumberInt(312)
-                    }, 
+                        "percentage" : 45,
+                        "population" : 299
+                    },
                     "under" : {
-                        "percentage" : NumberInt(37), 
-                        "population" : NumberInt(187)
+                        "percentage" : 55,
+                        "population" : 370
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(55), 
-                        "population" : NumberInt(720)
-                    }, 
+                        "percentage" : 61,
+                        "population" : 593
+                    },
                     "host" : {
-                        "percentage" : NumberInt(45), 
-                        "population" : NumberInt(599)
+                        "percentage" : 39,
+                        "population" : 375
                     }
                 }
-            }, 
+            },
             "local" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(60), 
-                        "population" : NumberInt(234)
-                    }, 
+                        "percentage" : 34,
+                        "population" : 167
+                    },
                     "under" : {
-                        "percentage" : NumberInt(40), 
-                        "population" : NumberInt(153)
+                        "percentage" : 66,
+                        "population" : 327
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(54), 
-                        "population" : NumberInt(515)
-                    }, 
+                        "percentage" : 57,
+                        "population" : 391
+                    },
                     "host" : {
-                        "percentage" : NumberInt(46), 
-                        "population" : NumberInt(433)
+                        "percentage" : 43,
+                        "population" : 290
                     }
-                }, 
+                },
                 "original" : {
                     "guest" : {
-                        "percentage" : NumberInt(49), 
-                        "population" : NumberInt(171)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(51), 
-                        "population" : NumberInt(175)
+                        "percentage" : 0,
+                        "population" : 0
                     }
                 }
             }
         }, 
         {
-            "group" : "all_prefer", 
+            "group" : "all_prefer",
             "national" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(67), 
-                        "population" : NumberInt(42)
-                    }, 
+                        "percentage" : 48,
+                        "population" : 155
+                    },
                     "under" : {
-                        "percentage" : NumberInt(33), 
-                        "population" : NumberInt(21)
+                        "percentage" : 52,
+                        "population" : 171
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(45), 
-                        "population" : NumberInt(115)
-                    }, 
+                        "percentage" : 60,
+                        "population" : 381
+                    },
                     "host" : {
-                        "percentage" : NumberInt(55), 
-                        "population" : NumberInt(142)
+                        "percentage" : 40,
+                        "population" : 256
                     }
                 }
-            }, 
+            },
             "local" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(59), 
-                        "population" : NumberInt(44)
-                    }, 
+                        "percentage" : 28,
+                        "population" : 74
+                    },
                     "under" : {
-                        "percentage" : NumberInt(41), 
-                        "population" : NumberInt(30)
+                        "percentage" : 72,
+                        "population" : 190
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(49), 
-                        "population" : NumberInt(104)
-                    }, 
+                        "percentage" : 58,
+                        "population" : 251
+                    },
                     "host" : {
-                        "percentage" : NumberInt(51), 
-                        "population" : NumberInt(109)
+                        "percentage" : 42,
+                        "population" : 184
                     }
-                }, 
+                },
                 "original" : {
                     "guest" : {
-                        "percentage" : NumberInt(0), 
-                        "population" : NumberInt(0)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(0), 
-                        "population" : NumberInt(0)
+                        "percentage" : 0,
+                        "population" : 0
                     }
                 }
             }
         }, 
         {
-            "group" : "more_than_sixty", 
+            "group" : "more_than_sixty",
             "national" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(60), 
-                        "population" : NumberInt(9)
-                    }, 
+                        "percentage" : 60,
+                        "population" : 3
+                    },
                     "under" : {
-                        "percentage" : NumberInt(40), 
-                        "population" : NumberInt(6)
+                        "percentage" : 40,
+                        "population" : 2
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(69), 
-                        "population" : NumberInt(22)
-                    }, 
+                        "percentage" : 60,
+                        "population" : 3
+                    },
                     "host" : {
-                        "percentage" : NumberInt(31), 
-                        "population" : NumberInt(10)
+                        "percentage" : 40,
+                        "population" : 2
                     }
                 }
-            }, 
+            },
             "local" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(50), 
-                        "population" : NumberInt(3)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "under" : {
-                        "percentage" : NumberInt(50), 
-                        "population" : NumberInt(3)
+                        "percentage" : 0,
+                        "population" : 0
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(70), 
-                        "population" : NumberInt(21)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(30), 
-                        "population" : NumberInt(9)
+                        "percentage" : 0,
+                        "population" : 0
                     }
-                }, 
+                },
                 "original" : {
                     "guest" : {
-                        "percentage" : NumberInt(57), 
-                        "population" : NumberInt(40)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(43), 
-                        "population" : NumberInt(30)
+                        "percentage" : 0,
+                        "population" : 0
                     }
                 }
             }
         }, 
         {
-            "group" : "top_100", 
+            "group" : "top_100",
             "national" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(62), 
-                        "population" : NumberInt(24)
-                    }, 
+                        "percentage" : 75,
+                        "population" : 3
+                    },
                     "under" : {
-                        "percentage" : NumberInt(38), 
-                        "population" : NumberInt(15)
+                        "percentage" : 25,
+                        "population" : 1
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(69), 
-                        "population" : NumberInt(29)
-                    }, 
+                        "percentage" : 50,
+                        "population" : 1
+                    },
                     "host" : {
-                        "percentage" : NumberInt(31), 
-                        "population" : NumberInt(13)
+                        "percentage" : 50,
+                        "population" : 1
                     }
                 }
-            }, 
+            },
             "local" : {
                 "total_point" : {
                     "over" : {
-                        "percentage" : NumberInt(61), 
-                        "population" : NumberInt(20)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "under" : {
-                        "percentage" : NumberInt(39), 
-                        "population" : NumberInt(13)
+                        "percentage" : 0,
+                        "population" : 0
                     }
-                }, 
+                },
                 "spread_point" : {
                     "guest" : {
-                        "percentage" : NumberInt(60), 
-                        "population" : NumberInt(25)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(40), 
-                        "population" : NumberInt(17)
+                        "percentage" : 0,
+                        "population" : 0
                     }
-                }, 
+                },
                 "original" : {
                     "guest" : {
-                        "percentage" : NumberInt(58), 
-                        "population" : NumberInt(22)
-                    }, 
+                        "percentage" : 0,
+                        "population" : 0
+                    },
                     "host" : {
-                        "percentage" : NumberInt(42), 
-                        "population" : NumberInt(16)
+                        "percentage" : 0,
+                        "population" : 0
                     }
                 }
             }
         }
     ]
 }
-
 ```
 
