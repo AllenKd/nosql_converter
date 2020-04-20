@@ -79,11 +79,17 @@ class NoSqlConverter:
         json_document["gamble_info"]["local"] = {
             "total_point": {
                 "threshold": row["local_total_point_threshold"],
-                "response": row["local_total_point_threshold_response_ratio"],
+                "response": {
+                    "under": row["local_total_point_under_threshold_response_ratio"],
+                    "over": row["local_total_point_over_threshold_response_ratio"],
+                },
             },
             "spread_point": {
                 "host": row["local_host_point_spread"],
-                "response": {"host": row["local_host_point_spread_response_ratio"]},
+                "response": {
+                    "host": row["local_host_point_spread_response_ratio"],
+                    "guest": row["local_guest_point_spread_response_ratio"],
+                },
             },
             "original": {
                 "response": {
