@@ -105,13 +105,15 @@ class NoSqlConverter:
         json_document["judgement"] = json_document.get("judgement", {})
         json_document["judgement"]["game"] = json_document["judgement"].get("game", {})
         json_document["judgement"]["game"]["national"] = {
-            "total_point": bool(row["over_total_point_national"]),
+            "total_point": "over"
+            if bool(row["over_total_point_national"])
+            else "under",
             "spread_point": "host"
             if row["host_win_point_spread_national"]
             else "guest",
         }
         json_document["judgement"]["game"]["local"] = {
-            "total_point": bool(row["over_total_point_local"]),
+            "total_point": "over" if bool(row["over_total_point_local"]) else "under",
             "spread_point": "host" if row["host_win_point_spread_local"] else "guest",
             "original": "host" if row["host_win_original"] else "guest",
         }
