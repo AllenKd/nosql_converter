@@ -40,7 +40,7 @@ class NoSqlConverter:
                 self.add_prediction_judgement_info(row, json_document, group)
             self.remove_nan_key(json_document)
             self.logger.debug("wiped document: {}".format(json_document))
-            self.mongo_client.update(json_document, json_document, upsert=True)
+            self.mongo_client.replace_one(json_document, json_document, upsert=True)
 
     def get_prediction_groups(self):
         self.logger.debug("getting prediction group")
@@ -49,7 +49,7 @@ class NoSqlConverter:
         return [group[0][16:] for group in cursor.fetchall()]
 
     def add_common_info(self, row, json_document, index):
-        self.logger.debug(f"add common info: {row}")
+        self.logger.debug(f"add common info")
 
         json_document["game_id"] = index
         json_document["game_time"] = datetime.datetime.strptime(
