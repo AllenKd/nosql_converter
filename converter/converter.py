@@ -1,11 +1,11 @@
 import datetime
+import math
 
 import pandas as pd
 from pymongo import MongoClient
 
 from config.logger import get_logger
 from converter import constant
-import math
 from util.util import Util
 
 
@@ -400,4 +400,4 @@ class NoSqlConverter:
         if last_id:
             return last_id["game_id"]
         else:
-            return 1
+            return 0
