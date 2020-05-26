@@ -1,6 +1,8 @@
 import datetime
+import json
 import math
 
+import numpy as np
 import pandas as pd
 from pymongo import MongoClient
 
@@ -26,9 +28,8 @@ class NoSqlConverter:
     def start(self):
         self.logger.info("start converter")
 
-        for index, row in self.get_joined_table(
-            start_id=self.last_converted_id()
-        ).iterrows():
+        for index, row in self.get_game_data(start_id=self.last_converted_id()).iterrows():
+            row = self.join_row(row)
             self.logger.debug("wipe game id: {}".format(index))
             json_document = {}
             self.add_common_info(row, json_document, index)
@@ -379,19 +380,38 @@ class NoSqlConverter:
                 "SELECT * FROM %s LIMIT 10" % (table_name), con=self.db, index_col="id"
             )
 
-    def get_joined_table(self, start_id=0):
-        self.logger.info("start get joined table")
-        sql_select = "SELECT %s FROM game_data " % ", ".join(constant.joined_columns)
-        sql_join = " ".join(
-            [
-                "LEFT JOIN %s ON %s.id=game_data.id " % (table_name, table_name)
-                for table_name in constant.joined_tables
-                if table_name != "game_data"
-            ]
-        )
-        sql_where = "WHERE game_data.id > %s" % start_id
-        sql = sql_select + sql_join + sql_where
+    def get_game_data(self, start_id=0):
+        sql = f"SELECT * FROM game_data WHERE game_data.id > {start_id}"
         return pd.read_sql(sql, con=self.db, index_col="id")
+
+    def join_row(self, row):
+        sql_template = (
+            lambda table_name: f"SELECT * FROM {table_name} WHERE game_date = {row['game_date']} AND gamble_id = {row['gamble_id']} AND game_type = '{row['game_type']}'"
+        )
+
+        def update_row(table, update_column=False):
+            sql = sql_template(table)
+            df = pd.read_sql(sql, con=self.db, index_col="id")
+            if update_column:
+                add_suffix(df)
+            a = df.iloc[0]
+            assert len(df) == 1
+
+            for _, r in df.iterrows():
+                b = r
+            return row.combine(a, lambda x, y: x or y, fill_value=0)
+
+        def add_suffix(df):
+            columns = [(c, f"{c}__{group}") for c in df.iloc[:, 3:].columns.values]
+            df.rename(columns=dict(columns), inplace=True)
+
+        row = update_row("game_judgement")
+        for group in ["all_member", "all_prefer", "top_100", "more_than_sixty"]:
+            row = update_row(f"prediction_data_{group}", update_column=True)
+            row = update_row(f"prediction_judgement_{group}", update_column=True)
+
+        # due to numpy.int64 un-serializable for json, have to convert to normal python object first.
+        return json.loads(row.to_json())
 
     def last_converted_id(self):
         last_id = self.mongo_client.find_one(
